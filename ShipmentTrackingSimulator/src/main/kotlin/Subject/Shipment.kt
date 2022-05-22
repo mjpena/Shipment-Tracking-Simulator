@@ -1,0 +1,4 @@
+package Subject
+
+class Shipment {
+}

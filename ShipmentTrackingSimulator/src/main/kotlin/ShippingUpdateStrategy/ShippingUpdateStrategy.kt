@@ -1,0 +1,4 @@
+package ShippingUpdateStrategy
+
+interface ShippingUpdateStrategy {
+}

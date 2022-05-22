@@ -1,0 +1,4 @@
+package ShippingUpdateStrategy
+
+class ShippedShippingUpdateStrategy {
+}
