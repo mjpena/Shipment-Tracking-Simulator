@@ -29,7 +29,8 @@ object TrackingSimulator {
     }
 
     suspend fun runSimulation(){
-        val shipmentInformationList: List<String> = readShipmentInformation("")
+        val filename: String = "C:\\Users\\melan\\Documents\\School\\Summer 2022\\CS 5700\\assignment_2\\test.txt"
+        val shipmentInformationList: List<String> = readShipmentInformation(filename)
         for (shippingInformation in shipmentInformationList){
             delay(1000)
             val shippingUpdateStatus = shippingInformation.split(",")[0]
