@@ -3,7 +3,7 @@ package subject
 import observer.TrackerViewHelper
 
 interface Subject {
-    fun notifyObserver()
+    fun notifyObservers()
     fun registerObserver(trackerViewHelper: TrackerViewHelper)
     fun removeObserver(trackerViewHelper: TrackerViewHelper)
 }

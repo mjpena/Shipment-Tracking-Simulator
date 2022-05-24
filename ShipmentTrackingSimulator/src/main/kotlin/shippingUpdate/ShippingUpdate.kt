@@ -4,4 +4,8 @@ class ShippingUpdate(previousShippingInformationStatus: String, shippingInformat
     val previousStatus: String = previousShippingInformationStatus
     val newStatus: String = shippingInformationStatus
     val timeStamp: Long = shippingInformationTimestamp
+
+    override fun toString(): String {
+        return "Shipment went from $previousStatus to $newStatus on $timeStamp."
+    }
 }
