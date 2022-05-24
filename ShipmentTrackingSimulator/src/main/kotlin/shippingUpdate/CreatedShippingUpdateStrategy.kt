@@ -3,10 +3,14 @@ package shippingUpdate
 import TrackingSimulator
 import subject.Shipment
 
-class CreatedShippingUpdateStrategy(shippingInformation: String): ShippingUpdateStrategy(shippingInformation) {
-    override fun updateShipment() {
-        val shipment: Shipment = Shipment(shippingUpdateId, shippingUpdateStatus)
-        shipment.addUpdate(createShippingUpdate("nonexistent"))
+class CreatedShippingUpdateStrategy(): ShippingUpdateStrategy {
+    private fun createShipment(shippingUpdateId: String){
+        val shipment: Shipment = Shipment(shippingUpdateId, "nonexistent")
         TrackingSimulator.addShipment(shipment)
+    }
+
+    override fun updateShipment(shippingInformation: String) {
+        createShipment(getShippingUpdateId(shippingInformation))
+        getShipmentWithAddedShippingUpdate(shippingInformation)
     }
 }

@@ -1,14 +1,11 @@
 package shippingUpdate
 
-class NoteAddedShippingUpdateStrategy(shippingInformation: String): ShippingUpdateStrategy(shippingInformation) {
-    override fun updateShipment() {
-        val shipment = TrackingSimulator.findShipment(shippingUpdateId)
-        if (shipment == null){
-            throw Exception("Cannot add shipping update. Shipment does not exist.")
-        }
-        else{
-            shipment.addNote(shippingInformation.split(",")[3])
-            shipment.addUpdate(createShippingUpdate(shipment.status))
-        }
+class NoteAddedShippingUpdateStrategy(): ShippingUpdateStrategy {
+    private fun getShippingUpdateNote(shippingInformation: String): String{
+        return shippingInformation.split(",")[3]
+    }
+
+    override fun updateShipment(shippingInformation: String) {
+        getShipmentWithAddedShippingUpdate(shippingInformation).addNote(getShippingUpdateNote(shippingInformation))
     }
 }
