@@ -38,7 +38,7 @@ class TrackerViewHelper(shipmentId: String): Observer {
         shipmentStatus = shipment.status
         shipmentLocation = shipment.currentLocation
         shipmentDeliveryDate.add(shipment.expectedDeliveryDate)
-        shipmentNotes = shipment.notes as SnapshotStateList<String>
-        shipmentUpdateHistory = shipment.updateHistory.toString() as SnapshotStateList<String>
+        //shipmentNotes = shipment.notes as SnapshotStateList<String>
+        //shipmentUpdateHistory = shipment.updateHistory.toString() as SnapshotStateList<String>
     }
 }

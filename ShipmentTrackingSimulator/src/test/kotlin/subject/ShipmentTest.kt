@@ -1,5 +1,6 @@
 package subject
 
+import TrackingSimulator
 import observer.TrackerViewHelper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -79,5 +80,18 @@ internal class ShipmentTest{
         assertTrue(shipment.observers.size == 0)
         val trackerViewHelper: TrackerViewHelper = TrackerViewHelper(shipmentId)
         shipment.removeObserver(trackerViewHelper)
+    }
+
+    @Test
+    fun notifyObservers(){
+        TrackingSimulator.addShipment(shipment)
+        val trackerViewHelper: TrackerViewHelper = TrackerViewHelper(shipmentId)
+        val trackerViewHelper2: TrackerViewHelper = TrackerViewHelper(shipmentId)
+        shipment.registerObserver(trackerViewHelper)
+        shipment.registerObserver(trackerViewHelper2)
+        shipment.status = "cancelled"
+        shipment.notifyObservers()
+        assertTrue(trackerViewHelper.shipmentStatus == shipment.status)
+        assertTrue(trackerViewHelper2.shipmentStatus == shipment.status)
     }
 }
