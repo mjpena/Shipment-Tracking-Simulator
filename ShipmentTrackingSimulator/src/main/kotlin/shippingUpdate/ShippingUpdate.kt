@@ -1,7 +1,7 @@
 package shippingUpdate
 
 class ShippingUpdate(previousShippingInformationStatus: String, shippingInformationStatus: String, shippingInformationTimestamp: Long) {
-    var previousStatus: String = previousShippingInformationStatus
-    var newStatus: String = shippingInformationStatus
-    var timeStamp: Long = shippingInformationTimestamp
+    val previousStatus: String = previousShippingInformationStatus
+    val newStatus: String = shippingInformationStatus
+    val timeStamp: Long = shippingInformationTimestamp
 }

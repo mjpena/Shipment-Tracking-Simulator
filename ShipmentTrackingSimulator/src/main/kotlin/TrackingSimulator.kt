@@ -4,8 +4,8 @@ import subject.Shipment
 import java.io.File
 
 object TrackingSimulator {
-    private val shipments: MutableList<Shipment> = mutableListOf();
-    private val shippingUpdateStrategies = mapOf<String, ShippingUpdateStrategy>(
+    private val shipments: MutableList<Shipment> = mutableListOf()
+    private val shippingUpdateStrategies = mapOf(
         Pair("created", CreatedShippingUpdateStrategy()),
         Pair("shipped", ShippedShippingUpdateStrategy()),
         Pair("location", LocationShippingUpdateStrategy()),
