@@ -8,6 +8,7 @@ class LocationShippingUpdateStrategy(): ShippingUpdateStrategy {
     }
 
     override fun updateShipment(shippingInformation: String) {
-        getShipmentWithAddedShippingUpdate(shippingInformation).currentLocation = getShippingUpdateCurrentLocation(shippingInformation)
+        getNonNullShipment(getShippingUpdateId(shippingInformation)).currentLocation = getShippingUpdateCurrentLocation(shippingInformation)
+        addShippingUpdateToShipment(shippingInformation)
     }
 }

@@ -6,6 +6,7 @@ class NoteAddedShippingUpdateStrategy(): ShippingUpdateStrategy {
     }
 
     override fun updateShipment(shippingInformation: String) {
-        getShipmentWithAddedShippingUpdate(shippingInformation).addNote(getShippingUpdateNote(shippingInformation))
+        getNonNullShipment(getShippingUpdateId(shippingInformation)).notes.add(getShippingUpdateNote(shippingInformation))
+        addShippingUpdateToShipment(shippingInformation)
     }
 }

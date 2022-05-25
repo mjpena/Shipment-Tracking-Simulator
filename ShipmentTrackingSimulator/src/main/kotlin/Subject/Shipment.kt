@@ -12,15 +12,14 @@ class Shipment(val id: String, var status: String): Subject {
             }
             field = value
         }
-    var notes: MutableList<String> = mutableListOf()
-        private set
-    var updateHistory: MutableList<ShippingUpdate> = mutableListOf()
-        private set
+    val notes: MutableList<String> = mutableListOf()
+    val updateHistory: MutableList<ShippingUpdate> = mutableListOf()
     fun addNote(note: String){
         notes.add(note)
     }
     fun addUpdate(shippingUpdate: ShippingUpdate){
         updateHistory.add(shippingUpdate)
+        this.status = shippingUpdate.newStatus
         notifyObservers()
     }
     override fun notifyObservers(){
