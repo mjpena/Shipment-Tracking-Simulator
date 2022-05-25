@@ -16,7 +16,7 @@ internal class ShipmentTest{
     private val shipmentNote1: String = "note 1"
     private val shipmentNote2: String = "note 2"
     private val shipment: Shipment = Shipment(shipmentId, shipmentStatus)
-    private val shippingUpdate: ShippingUpdate = ShippingUpdate("nonexistant", shipmentStatus, 10399890923)
+    private val shippingUpdate: ShippingUpdate = ShippingUpdate("N/A", shipmentStatus, 10399890923)
 
     @Test
     fun createShipment(){
@@ -57,6 +57,7 @@ internal class ShipmentTest{
     fun registerRemoveObserver(){
         val trackerViewHelper: TrackerViewHelper = TrackerViewHelper(shipmentId)
         val trackerViewHelper2: TrackerViewHelper = TrackerViewHelper(shipmentId)
+        val shipment: Shipment = Shipment(shipmentId, shipmentStatus)
         shipment.registerObserver(trackerViewHelper)
         shipment.registerObserver(trackerViewHelper2)
         assertTrue(shipment.observers.contains(trackerViewHelper))
@@ -80,18 +81,5 @@ internal class ShipmentTest{
         assertTrue(shipment.observers.size == 0)
         val trackerViewHelper: TrackerViewHelper = TrackerViewHelper(shipmentId)
         shipment.removeObserver(trackerViewHelper)
-    }
-
-    @Test
-    fun notifyObservers(){
-        TrackingSimulator.addShipment(shipment)
-        val trackerViewHelper: TrackerViewHelper = TrackerViewHelper(shipmentId)
-        val trackerViewHelper2: TrackerViewHelper = TrackerViewHelper(shipmentId)
-        shipment.registerObserver(trackerViewHelper)
-        shipment.registerObserver(trackerViewHelper2)
-        shipment.status = "cancelled"
-        shipment.notifyObservers()
-        assertTrue(trackerViewHelper.shipmentStatus == shipment.status)
-        assertTrue(trackerViewHelper2.shipmentStatus == shipment.status)
     }
 }

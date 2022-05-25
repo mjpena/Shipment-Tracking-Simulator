@@ -2,6 +2,7 @@ package shippingUpdate
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class LocationShippingUpdateStrategyTest{
     @Test
@@ -23,7 +24,8 @@ internal class LocationShippingUpdateStrategyTest{
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
         val locationShippingInformation: String = "location,S00001,1234455"
         val locationShippingUpdateStrategy: LocationShippingUpdateStrategy = LocationShippingUpdateStrategy()
-        //todo: check for not enough info shipping info
-        locationShippingUpdateStrategy.updateShipment(locationShippingInformation)
+        assertThrows<Exception>{
+            locationShippingUpdateStrategy.updateShipment(locationShippingInformation)
+        }
     }
 }

@@ -28,8 +28,7 @@ object TrackingSimulator {
         return File(filename).readLines()
     }
 
-    suspend fun runSimulation(){
-        val filename: String = "C:\\Users\\melan\\Documents\\School\\Summer 2022\\CS 5700\\assignment_2\\test.txt"
+    suspend fun runSimulation(filename: String){
         val shipmentInformationList: List<String> = readShipmentInformation(filename)
         for (shippingInformation in shipmentInformationList){
             delay(1000)
