@@ -4,7 +4,7 @@ import observer.TrackerViewHelper
 import shippingUpdate.ShippingUpdate
 class Shipment(val id: String, var status: String): Subject {
     val observers: MutableList<TrackerViewHelper> = mutableListOf()
-    var currentLocation: String = "Shipping Warehouse"
+    var currentLocation: String = "unknown"
     var expectedDeliveryDate: Long = 0
         set(value) {
             if (value < 0){

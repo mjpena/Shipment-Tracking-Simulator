@@ -7,7 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import subject.Shipment
-import javax.swing.plaf.nimbus.State
 
 class TrackerViewHelper(shipmentId: String): Observer {
     var shipmentId by mutableStateOf<String>(shipmentId)
@@ -17,28 +16,27 @@ class TrackerViewHelper(shipmentId: String): Observer {
     var shipmentNotes = mutableStateListOf<String>()
     var shipmentUpdateHistory = mutableStateListOf<String>()
 
-    private fun getUpToDateShipment(): Shipment {
-        return TrackingSimulator.findShipment(shipmentId)!!
+    init {
+        trackShipment()
     }
-
     fun trackShipment(){
-        val shipment = getUpToDateShipment()
-            ?: // todo: warning shipment dne
-            return
+        val shipment: Shipment = TrackingSimulator.findShipment(shipmentId) ?: return
         shipment.registerObserver(this)
         update()
     }
 
     fun stopTracking(){
-        val shipment = getUpToDateShipment()
+        val shipment: Shipment = TrackingSimulator.findShipment(shipmentId)!!
         shipment.removeObserver(this)
     }
     override fun update() {
-        val shipment = getUpToDateShipment()
+        val shipment = TrackingSimulator.findShipment(shipmentId)!!
         shipmentStatus = shipment.status
         shipmentLocation = shipment.currentLocation
         shipmentDeliveryDate.add(shipment.expectedDeliveryDate)
-        //shipmentNotes = shipment.notes as SnapshotStateList<String>
-        //shipmentUpdateHistory = shipment.updateHistory.toString() as SnapshotStateList<String>
+        if (shipment.notes.size >0 && !shipmentNotes.contains(shipment.notes.last())){
+            shipmentNotes.add(shipment.notes.last())
+        }
+        shipmentUpdateHistory.add(shipment.updateHistory.last().toString())
     }
 }
