@@ -32,6 +32,7 @@ fun trackerView(trackerViewHelper: TrackerViewHelper, trackerViewHelpers: Snapsh
             }
             Text(text, fontSize = 30.sp)
             IconButton(onClick = {
+                trackerViewHelper.stopTracking()
                 trackerViewHelpers.remove(trackerViewHelper)
             }){
                 Icon(Icons.Default.Close, "Stop Tracking Shipment")
