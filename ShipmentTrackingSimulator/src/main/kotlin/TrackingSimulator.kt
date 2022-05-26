@@ -2,6 +2,7 @@ import kotlinx.coroutines.delay
 import shippingUpdate.*
 import subject.Shipment
 import java.io.File
+import java.time.Duration
 
 object TrackingSimulator {
     private val shipments: MutableList<Shipment> = mutableListOf()
@@ -28,10 +29,10 @@ object TrackingSimulator {
         return File(filename).readLines()
     }
 
-    suspend fun runSimulation(filename: String){
+    suspend fun runSimulation(filename: String, delay: Long = 1000){
         val shipmentInformationList: List<String> = readShipmentInformation(filename)
         for (shippingInformation in shipmentInformationList){
-            delay(1000)
+            delay(delay)
             val shippingUpdateStatus = shippingInformation.split(",")[0]
             // todo: add error catching message
             shippingUpdateStrategies[shippingUpdateStatus]?.updateShipment(shippingInformation) ?: throw Exception("")

@@ -9,12 +9,17 @@ import subject.Shipment
 
 class TrackerViewHelper(shipmentId: String): Observer {
     var shipmentId by mutableStateOf<String>(shipmentId)
+        private set
     var shipmentStatus by mutableStateOf<String>("")
+        private set
     var shipmentLocation by mutableStateOf<String>("")
+        private set
     var shipmentDeliveryDate = mutableStateListOf<Long>()
+        private set
     var shipmentNotes = mutableStateListOf<String>()
+        private set
     var shipmentUpdateHistory = mutableStateListOf<String>()
-
+        private set
     init {
         trackShipment()
     }
@@ -23,7 +28,6 @@ class TrackerViewHelper(shipmentId: String): Observer {
         shipment.registerObserver(this)
         update()
     }
-
     fun stopTracking() {
         TrackingSimulator.findShipment(shipmentId)?.removeObserver(this)
     }

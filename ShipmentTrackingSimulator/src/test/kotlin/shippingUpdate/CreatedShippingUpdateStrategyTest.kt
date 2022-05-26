@@ -21,7 +21,8 @@ internal class CreatedShippingUpdateStrategyTest{
 
     @Test
     fun getShippingUpdateId(){
-        assertEquals(createShippingUpdateStrategy.getShippingUpdateId(shippingInformation), "S00001")
+        val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
+        assertEquals(shippingInformationParser.getShippingUpdateId(), "S00001")
     }
 
     @Test

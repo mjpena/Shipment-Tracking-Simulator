@@ -1,12 +1,9 @@
 package shippingUpdate
 
 class NoteAddedShippingUpdateStrategy(): ShippingUpdateStrategy {
-    private fun getShippingUpdateNote(shippingInformation: String): String{
-        return shippingInformation.split(",")[3]
-    }
-
     override fun updateShipment(shippingInformation: String) {
-        getNonNullShipment(getShippingUpdateId(shippingInformation)).notes.add(getShippingUpdateNote(shippingInformation))
+        val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
+        getNonNullShipment(shippingInformationParser.getShippingUpdateId()).notes.add(shippingInformationParser.getShippingUpdateNote())
         addShippingUpdateToShipment(shippingInformation)
     }
 }

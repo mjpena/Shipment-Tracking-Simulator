@@ -10,7 +10,8 @@ class CreatedShippingUpdateStrategy(): ShippingUpdateStrategy {
     }
 
     override fun updateShipment(shippingInformation: String) {
-        createShipment(getShippingUpdateId(shippingInformation))
+        val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
+        createShipment(shippingInformationParser.getShippingUpdateId())
         addShippingUpdateToShipment(shippingInformation)
     }
 }
