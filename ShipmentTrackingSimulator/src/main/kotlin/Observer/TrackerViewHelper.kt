@@ -39,6 +39,15 @@ class TrackerViewHelper(shipmentId: String): Observer {
         if (shipment.notes.size >0 && !shipmentNotes.contains(shipment.notes.last())){
             shipmentNotes.add(shipment.notes.last())
         }
-        shipmentUpdateHistory.add(shipment.updateHistory.last().toString())
+        for (note in shipment.notes){
+            if (!shipmentNotes.contains(note)){
+                shipmentNotes.add(note)
+            }
+        }
+        for (update in shipment.updateHistory){
+            if (!shipmentUpdateHistory.contains(update.toString())){
+                shipmentUpdateHistory.add(update.toString())
+            }
+        }
     }
 }
