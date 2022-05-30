@@ -1,8 +1,5 @@
 package shippingUpdate
 
-import TrackingSimulator
-import subject.Shipment
-
 class ShippedShippingUpdateStrategy(): ShippingUpdateStrategy {
     override fun updateShipment(shippingInformation: String) {
         val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)

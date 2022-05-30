@@ -1,11 +1,10 @@
 import kotlinx.coroutines.delay
 import shippingUpdate.*
-import subject.Shipment
+import subject.ShipmentFactory
 import java.io.File
-import java.time.Duration
 
 object TrackingSimulator {
-    private val shipments: MutableList<Shipment> = mutableListOf()
+    private val shipmentFactories: MutableList<ShipmentFactory> = mutableListOf()
     private val shippingUpdateStrategies = mapOf(
         Pair("created", CreatedShippingUpdateStrategy()),
         Pair("shipped", ShippedShippingUpdateStrategy()),
@@ -15,14 +14,15 @@ object TrackingSimulator {
         Pair("lost", LostShippingUpdateStrategy()),
         Pair("canceled", CanceledShippingUpdateStrategy()),
         Pair("noteadded", NoteAddedShippingUpdateStrategy()),
+        Pair("early", EarlyShippingUpdateStrategy()),
     )
 
-    fun addShipment(shipment: Shipment){
-        shipments.add(shipment)
+    fun addShipment(shipmentFactory: ShipmentFactory){
+        shipmentFactories.add(shipmentFactory)
     }
 
-    fun findShipment(id: String): Shipment?{
-        return shipments.find { it.id == id }
+    fun findShipment(id: String): ShipmentFactory?{
+        return shipmentFactories.find { it.id == id }
     }
 
     private fun readShipmentInformation(filename: String): List<String>{

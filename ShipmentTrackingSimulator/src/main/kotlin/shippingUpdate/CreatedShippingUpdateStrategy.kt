@@ -1,17 +1,17 @@
 package shippingUpdate
 
 import TrackingSimulator
-import subject.Shipment
+import subject.ShipmentFactory
 
 class CreatedShippingUpdateStrategy(): ShippingUpdateStrategy {
-    private fun createShipment(shippingUpdateId: String){
-        var shipment: Shipment = Shipment(shippingUpdateId, "N/A")
-        TrackingSimulator.addShipment(shipment)
+    private fun createShipment(shippingInformation: String){
+        val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
+        val shipmentFactory: ShipmentFactory = ShipmentFactory.getShipment(shippingInformationParser.getShippingUpdateShipmentType(), shippingInformationParser.getShippingUpdateId())
+        TrackingSimulator.addShipment(shipmentFactory)
     }
 
     override fun updateShipment(shippingInformation: String) {
-        val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
-        createShipment(shippingInformationParser.getShippingUpdateId())
+        createShipment(shippingInformation)
         addShippingUpdateToShipment(shippingInformation)
     }
 }

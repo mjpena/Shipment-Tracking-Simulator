@@ -2,9 +2,10 @@ package subject
 
 import observer.TrackerViewHelper
 import shippingUpdate.ShippingUpdate
-class Shipment(val id: String, status: String): Subject {
+abstract class ShipmentFactory(id: String): Subject {
     val observers: MutableList<TrackerViewHelper> = mutableListOf()
-    var status: String = status
+    val id: String = id
+    var status: String = "N/A"
         set(value) {
             field = value
             notifyObservers()
@@ -24,26 +25,41 @@ class Shipment(val id: String, status: String): Subject {
         }
     val notes: MutableList<String> = mutableListOf()
     val updateHistory: MutableList<ShippingUpdate> = mutableListOf()
+
     fun addNote(note: String){
         notes.add(note)
         notifyObservers()
     }
+
     fun addUpdate(shippingUpdate: ShippingUpdate){
         updateHistory.add(shippingUpdate)
         this.status = shippingUpdate.newStatus
         notifyObservers()
     }
+
+    companion object {
+        fun getShipment(shipmentType: String, shippingId: String): ShipmentFactory {
+            if (shipmentType == "standard") return StandardShipment(shippingId)
+            if (shipmentType == "express") return ExpressShipment(shippingId)
+            if (shipmentType == "overnight") return OvernightShipment(shippingId)
+            if (shipmentType == "bulk") return BulkShipment(shippingId)
+            throw Exception("Invalid shipment type: $shipmentType")
+        }
+    }
+
     override fun notifyObservers(){
         for (observer in observers){
             observer.update()
         }
     }
+
     override fun registerObserver(trackerViewHelper: TrackerViewHelper) {
         if (observers.contains(trackerViewHelper)){
             return
         }
         observers.add(trackerViewHelper)
     }
+
     override fun removeObserver(trackerViewHelper: TrackerViewHelper){
         if (!observers.contains(trackerViewHelper)){
             return
