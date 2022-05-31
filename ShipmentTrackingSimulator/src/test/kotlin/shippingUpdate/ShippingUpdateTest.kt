@@ -19,13 +19,13 @@ internal class ShippingUpdateTest{
     @Test
     fun negativeLongValue(){
         org.junit.jupiter.api.assertThrows<Exception> {
-            val shippingUpdate2: ShippingUpdate = ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, -1203948)
+            ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, -1203948)
         }
     }
 
     @Test
     fun maxLongValue(){
-        val shippingUpdate2: ShippingUpdate = ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, Long.MAX_VALUE)
+        val shippingUpdate2: ShippingUpdate =ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, Long.MAX_VALUE)
         assertEquals(shippingUpdate2.timeStamp, Long.MAX_VALUE)
     }
 

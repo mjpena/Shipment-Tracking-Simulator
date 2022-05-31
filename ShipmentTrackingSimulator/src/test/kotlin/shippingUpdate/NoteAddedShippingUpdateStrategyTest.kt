@@ -12,7 +12,7 @@ internal class NoteAddedShippingUpdateStrategyTest{
         val noteShippingInformation: String = "note,S00001,1234455,note"
         val noteShippingUpdateStrategy: NoteAddedShippingUpdateStrategy = NoteAddedShippingUpdateStrategy()
         noteShippingUpdateStrategy.updateShipment(noteShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "note")
-        assertTrue(TrackingSimulator.findShipment("S00001")!!.notes.contains("note") )
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "note")
+        assertTrue(TrackingServer.findShipment("S00001")!!.notes.contains("note") )
     }
 }

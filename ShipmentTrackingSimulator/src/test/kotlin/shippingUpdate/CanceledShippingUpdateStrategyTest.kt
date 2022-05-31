@@ -1,6 +1,6 @@
 package shippingUpdate
 
-import TrackingSimulator
+import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -13,6 +13,6 @@ internal class CanceledShippingUpdateStrategyTest{
         val canceledShippingInformation: String = "canceled,S00001,1234455"
         val canceledShippingUpdateStrategy: CanceledShippingUpdateStrategy = CanceledShippingUpdateStrategy()
         canceledShippingUpdateStrategy.updateShipment(canceledShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "canceled")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "canceled")
     }
 }

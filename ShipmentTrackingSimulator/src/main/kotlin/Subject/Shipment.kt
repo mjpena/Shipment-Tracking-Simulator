@@ -2,7 +2,7 @@ package subject
 
 import observer.TrackerViewHelper
 import shippingUpdate.ShippingUpdate
-abstract class ShipmentFactory(id: String): Subject {
+abstract class Shipment(id: String): Subject {
     val observers: MutableList<TrackerViewHelper> = mutableListOf()
     val id: String = id
     var status: String = "N/A"
@@ -38,7 +38,7 @@ abstract class ShipmentFactory(id: String): Subject {
     }
 
     companion object {
-        fun getShipment(shipmentType: String, shippingId: String): ShipmentFactory {
+        fun getShipment(shipmentType: String, shippingId: String): Shipment {
             if (shipmentType == "standard") return StandardShipment(shippingId)
             if (shipmentType == "express") return ExpressShipment(shippingId)
             if (shipmentType == "overnight") return OvernightShipment(shippingId)

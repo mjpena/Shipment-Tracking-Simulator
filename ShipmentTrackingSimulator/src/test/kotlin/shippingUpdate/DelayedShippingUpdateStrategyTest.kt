@@ -1,7 +1,6 @@
 package shippingUpdate
 
-import TrackingSimulator
-import kotlinx.coroutines.Delay
+import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -15,8 +14,8 @@ internal class DelayedShippingUpdateStrategyTest{
         val delayedShippingInformation: String = "delayed,S00001,1234455,1233334"
         val delayedShippingUpdateStrategy: DelayedShippingUpdateStrategy = DelayedShippingUpdateStrategy()
         delayedShippingUpdateStrategy.updateShipment(delayedShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "delayed")
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.expectedDeliveryDate, 1233334)
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "delayed")
+        assertEquals(TrackingServer.findShipment("S00001")!!.expectedDeliveryDate, 1233334)
     }
 
     @Test
@@ -29,7 +28,7 @@ internal class DelayedShippingUpdateStrategyTest{
         assertThrows<Exception>{
             delayedShippingUpdateStrategy.updateShipment(delayedShippingInformation)
         }
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "created")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "created")
     }
 
     @Test

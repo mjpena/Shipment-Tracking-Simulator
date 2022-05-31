@@ -13,8 +13,8 @@ internal class LocationShippingUpdateStrategyTest{
         val locationShippingInformation: String = "location,S00001,1234455,Logan"
         val locationShippingUpdateStrategy: LocationShippingUpdateStrategy = LocationShippingUpdateStrategy()
         locationShippingUpdateStrategy.updateShipment(locationShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "location")
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.currentLocation, "Logan")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "location")
+        assertEquals(TrackingServer.findShipment("S00001")!!.currentLocation, "Logan")
     }
 
     @Test

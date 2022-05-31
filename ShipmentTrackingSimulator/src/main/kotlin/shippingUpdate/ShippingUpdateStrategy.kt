@@ -1,19 +1,19 @@
 package shippingUpdate
 
-import TrackingSimulator
-import subject.ShipmentFactory
+import TrackingServer
+import subject.Shipment
 
 interface ShippingUpdateStrategy {
     private fun createShippingUpdate(shippingUpdatePreviousStatus: String, shippingUpdateStatus: String, shippingUpdateTimestamp: Long): ShippingUpdate{
         return ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, shippingUpdateTimestamp)
     }
 
-    fun getNonNullShipment(shippingUpdateId: String): ShipmentFactory{
-        return TrackingSimulator.findShipment(shippingUpdateId)
+    fun getNonNullShipment(shippingUpdateId: String): Shipment{
+        return TrackingServer.findShipment(shippingUpdateId)
             ?: throw Exception("Cannot add shipping update. Shipment not found.")
     }
 
-    fun addShippingUpdateToShipment(shippingInformation: String): ShipmentFactory{
+    fun addShippingUpdateToShipment(shippingInformation: String): Shipment{
         val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
         val shippingUpdateStatus: String = shippingInformationParser.getShippingUpdateStatus()
         val shippingUpdateId: String = shippingInformationParser.getShippingUpdateId()

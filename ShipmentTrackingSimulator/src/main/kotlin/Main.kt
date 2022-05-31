@@ -19,13 +19,12 @@ import androidx.compose.ui.window.application
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import observer.TrackerViewHelper
-import javax.swing.Scrollable
 
 @Composable
 fun trackerView(trackerViewHelper: TrackerViewHelper, trackerViewHelpers: SnapshotStateList<TrackerViewHelper>){
     Column(modifier = Modifier.fillMaxWidth().padding(10.dp).border(border = BorderStroke(width = 1.dp, color = Color.Black))){
         Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.SpaceBetween){
-            var text = if (TrackingSimulator.findShipment(trackerViewHelper.shipmentId) == null){
+            var text = if (trackerViewHelper.shipment == null){
                 "Shipment with ID - ${trackerViewHelper.shipmentId} not found"
             } else{
                 "Tracking Shipment: ${trackerViewHelper.shipmentId}"
@@ -39,7 +38,7 @@ fun trackerView(trackerViewHelper: TrackerViewHelper, trackerViewHelpers: Snapsh
             }
         }
         Column(modifier = Modifier.padding(20.dp)){
-            if(TrackingSimulator.findShipment(trackerViewHelper.shipmentId) != null){
+            if(trackerViewHelper.shipment != null){
                 Row{ Text("Status: ${trackerViewHelper.shipmentStatus}")}
                 Row{ Text("Location: ${trackerViewHelper.shipmentLocation}")}
                 Row{ Text("Expected Delivery Date: ${trackerViewHelper.shipmentDeliveryDate.last()}")}
@@ -86,7 +85,7 @@ fun App() {
 
 fun main() = runBlocking {
     launch{
-        TrackingSimulator.runSimulation("C:\\Users\\melan\\Documents\\School\\Summer 2022\\CS 5700\\assignment_2\\test.txt")
+        TrackingServer
     }
 
     application {

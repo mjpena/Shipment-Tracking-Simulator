@@ -1,13 +1,14 @@
 package observer
 
-import TrackingSimulator
+import TrackingServer
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import subject.ShipmentFactory
+import subject.Shipment
 
 class TrackerViewHelper(shipmentId: String): Observer {
+    var shipment: Shipment? = null
     var shipmentId by mutableStateOf<String>(shipmentId)
         private set
     var shipmentStatus by mutableStateOf<String>("")
@@ -24,27 +25,29 @@ class TrackerViewHelper(shipmentId: String): Observer {
         trackShipment()
     }
     fun trackShipment(){
-        val shipmentFactory: ShipmentFactory = TrackingSimulator.findShipment(shipmentId) ?: return
-        shipmentFactory.registerObserver(this)
+        shipment = TrackingServer.findShipment(shipmentId)
+        if (shipment == null) return
+        shipment!!.registerObserver(this)
         update()
     }
     fun stopTracking() {
-        TrackingSimulator.findShipment(shipmentId)?.removeObserver(this)
+        if (shipment == null) return
+        shipment!!.removeObserver(this)
     }
     override fun update() {
-        val shipment = TrackingSimulator.findShipment(shipmentId)!!
-        shipmentStatus = shipment.status
-        shipmentLocation = shipment.currentLocation
-        shipmentDeliveryDate.add(shipment.expectedDeliveryDate)
-        if (shipment.notes.size >0 && !shipmentNotes.contains(shipment.notes.last())){
-            shipmentNotes.add(shipment.notes.last())
+        if (shipment == null) return
+        shipmentStatus = shipment!!.status
+        shipmentLocation = shipment!!.currentLocation
+        shipmentDeliveryDate.add(shipment!!.expectedDeliveryDate)
+        if (shipment!!.notes.size >0 && !shipmentNotes.contains(shipment!!.notes.last())){
+            shipmentNotes.add(shipment!!.notes.last())
         }
-        for (note in shipment.notes){
+        for (note in shipment!!.notes){
             if (!shipmentNotes.contains(note)){
                 shipmentNotes.add(note)
             }
         }
-        for (update in shipment.updateHistory){
+        for (update in shipment!!.updateHistory){
             if (!shipmentUpdateHistory.contains(update.toString())){
                 shipmentUpdateHistory.add(update.toString())
             }

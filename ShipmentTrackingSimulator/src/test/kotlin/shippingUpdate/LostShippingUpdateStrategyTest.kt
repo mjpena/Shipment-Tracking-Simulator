@@ -12,6 +12,6 @@ internal class LostShippingUpdateStrategyTest{
         val lostShippingInformation: String = "lost,S00001,1234455"
         val lostShippingUpdateStrategy: LostShippingUpdateStrategy = LostShippingUpdateStrategy()
         lostShippingUpdateStrategy.updateShipment(lostShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "lost")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "lost")
     }
 }

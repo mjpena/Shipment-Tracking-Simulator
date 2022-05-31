@@ -12,6 +12,6 @@ internal class DeliveredShippingUpdateStrategyTest{
         val deliveredShippingInformation: String = "delivered,S00001,1234455"
         val deliveredShippingUpdateStrategy: DeliveredShippingUpdateStrategy = DeliveredShippingUpdateStrategy()
         deliveredShippingUpdateStrategy.updateShipment(deliveredShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "delivered")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "delivered")
     }
 }

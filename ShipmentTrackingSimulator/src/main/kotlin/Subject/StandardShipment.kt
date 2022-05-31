@@ -1,3 +1,3 @@
 package subject
 
-class StandardShipment(id: String): ShipmentFactory(id)
+class StandardShipment(id: String): Shipment(id)

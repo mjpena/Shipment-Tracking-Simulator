@@ -13,8 +13,8 @@ internal class EarlyShippingUpdateStrategyTest {
         val earlyShippingInformation: String = "early,S00001,1234455,1233334"
         val earlyShippingUpdateStrategy: EarlyShippingUpdateStrategy = EarlyShippingUpdateStrategy()
         earlyShippingUpdateStrategy.updateShipment(earlyShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "early")
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.expectedDeliveryDate, 1233334)
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "early")
+        assertEquals(TrackingServer.findShipment("S00001")!!.expectedDeliveryDate, 1233334)
     }
 
     @Test
@@ -27,7 +27,7 @@ internal class EarlyShippingUpdateStrategyTest {
         assertThrows<Exception>{
             earlyShippingUpdateStrategy.updateShipment(earlyShippingInformation)
         }
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "created")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "created")
     }
 
     @Test

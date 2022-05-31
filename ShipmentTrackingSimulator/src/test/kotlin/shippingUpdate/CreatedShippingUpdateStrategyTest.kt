@@ -1,10 +1,9 @@
 package shippingUpdate
 
-import TrackingSimulator
+import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import javax.sound.midi.Track
 
 internal class CreatedShippingUpdateStrategyTest{
     private val shippingInformation: String = "created,S00001,1234455"
@@ -15,7 +14,7 @@ internal class CreatedShippingUpdateStrategyTest{
     @Test
     fun createShipmentUpdate(){
         createShippingUpdateStrategy.updateShipment(shippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "created")
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "created")
     }
 
     @Test

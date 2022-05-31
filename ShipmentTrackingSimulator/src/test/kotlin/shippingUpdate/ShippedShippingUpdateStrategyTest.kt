@@ -1,6 +1,6 @@
 package shippingUpdate
 
-import TrackingSimulator
+import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -13,7 +13,7 @@ internal class ShippedShippingUpdateStrategyTest{
         val shippedShippingInformation: String = "shipped,S00001,123455,234909849"
         val shippedShippingUpdateStrategy: ShippedShippingUpdateStrategy = ShippedShippingUpdateStrategy()
         shippedShippingUpdateStrategy.updateShipment(shippedShippingInformation)
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.status, "shipped")
-        assertEquals(TrackingSimulator.findShipment("S00001")!!.expectedDeliveryDate, 234909849)
+        assertEquals(TrackingServer.findShipment("S00001")!!.status, "shipped")
+        assertEquals(TrackingServer.findShipment("S00001")!!.expectedDeliveryDate, 234909849)
     }
 }
