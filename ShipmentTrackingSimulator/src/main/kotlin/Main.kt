@@ -24,7 +24,7 @@ import observer.TrackerViewHelper
 fun trackerView(trackerViewHelper: TrackerViewHelper, trackerViewHelpers: SnapshotStateList<TrackerViewHelper>){
     Column(modifier = Modifier.fillMaxWidth().padding(10.dp).border(border = BorderStroke(width = 1.dp, color = Color.Black))){
         Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.SpaceBetween){
-            var text = if (trackerViewHelper.shipment == null){
+            val text = if (trackerViewHelper.shipment == null){
                 "Shipment with ID - ${trackerViewHelper.shipmentId} not found"
             } else{
                 "Tracking Shipment: ${trackerViewHelper.shipmentId}"
@@ -39,6 +39,7 @@ fun trackerView(trackerViewHelper: TrackerViewHelper, trackerViewHelpers: Snapsh
         }
         Column(modifier = Modifier.padding(20.dp)){
             if(trackerViewHelper.shipment != null){
+                Row{ Text("Shipment Type: ${trackerViewHelper.shipmentType}")}
                 Row{ Text("Status: ${trackerViewHelper.shipmentStatus}")}
                 Row{ Text("Location: ${trackerViewHelper.shipmentLocation}")}
                 Row{ Text("Expected Delivery Date: ${trackerViewHelper.shipmentDeliveryDate.last()}")}
@@ -59,12 +60,12 @@ fun trackerView(trackerViewHelper: TrackerViewHelper, trackerViewHelpers: Snapsh
 
 @Composable
 @Preview
-fun App() {
+fun app() {
     val trackerViewHelpers = remember { mutableStateListOf<TrackerViewHelper>() }
     var userInput by mutableStateOf("")
 
     MaterialTheme {
-        Column() {
+        Column {
             Row(modifier = Modifier.fillMaxWidth().padding(10.dp)){
                 TextField(userInput, { userInput = it })
                 Button(onClick = {
@@ -90,7 +91,7 @@ fun main() = runBlocking {
 
     application {
         Window(onCloseRequest = ::exitApplication) {
-            App()
+            app()
         }
     }
 }

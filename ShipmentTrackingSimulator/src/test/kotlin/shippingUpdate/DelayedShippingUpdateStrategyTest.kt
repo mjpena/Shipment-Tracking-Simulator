@@ -4,6 +4,8 @@ import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import shippingUpdate.CreatedShippingUpdateStrategy
+import shippingUpdate.DelayedShippingUpdateStrategy
 
 internal class DelayedShippingUpdateStrategyTest{
     @Test

@@ -4,6 +4,7 @@ import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import shippingUpdate.CreatedShippingUpdateStrategy
 
 internal class CreatedShippingUpdateStrategyTest{
     private val shippingInformation: String = "created,S00001,1234455"
@@ -15,6 +16,8 @@ internal class CreatedShippingUpdateStrategyTest{
     fun createShipmentUpdate(){
         createShippingUpdateStrategy.updateShipment(shippingInformation)
         assertEquals(TrackingServer.findShipment("S00001")!!.status, "created")
+        assertEquals(TrackingServer.findShipment("S00001")!!.shipmentType, "standard")
+
     }
 
     @Test

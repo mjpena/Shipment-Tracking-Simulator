@@ -2,6 +2,7 @@ package shippingUpdate
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import shippingUpdate.ShippingUpdate
 
 internal class ShippingUpdateTest{
     private val shippingUpdatePreviousStatus: String = "created"
@@ -25,7 +26,7 @@ internal class ShippingUpdateTest{
 
     @Test
     fun maxLongValue(){
-        val shippingUpdate2: ShippingUpdate =ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, Long.MAX_VALUE)
+        val shippingUpdate2: ShippingUpdate = ShippingUpdate(shippingUpdatePreviousStatus, shippingUpdateStatus, Long.MAX_VALUE)
         assertEquals(shippingUpdate2.timeStamp, Long.MAX_VALUE)
     }
 

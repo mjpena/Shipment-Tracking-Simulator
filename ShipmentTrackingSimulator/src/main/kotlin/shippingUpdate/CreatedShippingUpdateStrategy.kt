@@ -6,7 +6,7 @@ import subject.Shipment
 class CreatedShippingUpdateStrategy(): ShippingUpdateStrategy {
     private fun createShipment(shippingInformation: String){
         val shippingInformationParser: ShippingInformationParser = ShippingInformationParser(shippingInformation)
-        val shipment: Shipment = Shipment.getShipment(shippingInformationParser.getShippingUpdateShipmentType(), shippingInformationParser.getShippingUpdateId())
+        val shipment: Shipment = Shipment.getShipment(shippingInformationParser.getShippingUpdateId(), shippingInformationParser.getShippingUpdateShipmentType())
         TrackingServer.addShipment(shipment)
     }
 

@@ -3,6 +3,8 @@ package shippingUpdate
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import shippingUpdate.CreatedShippingUpdateStrategy
+import shippingUpdate.EarlyShippingUpdateStrategy
 
 internal class EarlyShippingUpdateStrategyTest {
     @Test

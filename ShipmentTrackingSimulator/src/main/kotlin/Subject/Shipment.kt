@@ -2,9 +2,8 @@ package subject
 
 import observer.TrackerViewHelper
 import shippingUpdate.ShippingUpdate
-abstract class Shipment(id: String): Subject {
+abstract class Shipment(val id: String, val shipmentType: String): Subject {
     val observers: MutableList<TrackerViewHelper> = mutableListOf()
-    val id: String = id
     var status: String = "N/A"
         set(value) {
             field = value
@@ -38,11 +37,11 @@ abstract class Shipment(id: String): Subject {
     }
 
     companion object {
-        fun getShipment(shipmentType: String, shippingId: String): Shipment {
-            if (shipmentType == "standard") return StandardShipment(shippingId)
-            if (shipmentType == "express") return ExpressShipment(shippingId)
-            if (shipmentType == "overnight") return OvernightShipment(shippingId)
-            if (shipmentType == "bulk") return BulkShipment(shippingId)
+        fun getShipment(shippingId: String, shipmentType: String): Shipment {
+            if (shipmentType == "standard") return StandardShipment(shippingId, shipmentType)
+            if (shipmentType == "express") return ExpressShipment(shippingId, shipmentType)
+            if (shipmentType == "overnight") return OvernightShipment(shippingId, shipmentType)
+            if (shipmentType == "bulk") return BulkShipment(shippingId, shipmentType)
             throw Exception("Invalid shipment type: $shipmentType")
         }
     }

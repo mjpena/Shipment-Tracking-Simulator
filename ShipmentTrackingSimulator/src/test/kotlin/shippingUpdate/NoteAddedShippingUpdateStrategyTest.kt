@@ -2,6 +2,8 @@ package shippingUpdate
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import shippingUpdate.CreatedShippingUpdateStrategy
+import shippingUpdate.NoteAddedShippingUpdateStrategy
 
 internal class NoteAddedShippingUpdateStrategyTest{
     @Test

@@ -8,7 +8,7 @@ import shippingUpdate.*
 import subject.Shipment
 
 object TrackingServer {
-    private val shipmentFactories: MutableList<Shipment> = mutableListOf()
+    private val shipments: MutableList<Shipment> = mutableListOf()
     private val shippingUpdateStrategies = mapOf(
         Pair("created", CreatedShippingUpdateStrategy()),
         Pair("shipped", ShippedShippingUpdateStrategy()),
@@ -40,10 +40,11 @@ object TrackingServer {
     }
 
     fun addShipment(shipment: Shipment){
-        shipmentFactories.add(shipment)
+        if (shipments.contains(shipment)) return
+        shipments.add(shipment)
     }
 
     fun findShipment(id: String): Shipment?{
-        return shipmentFactories.find { it.id == id }
+        return shipments.find { it.id == id }
     }
 }

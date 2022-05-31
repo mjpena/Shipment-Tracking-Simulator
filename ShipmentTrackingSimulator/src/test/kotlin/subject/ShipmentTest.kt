@@ -1,10 +1,13 @@
 package subject
 
+import TrackingServer
 import observer.TrackerViewHelper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import shippingUpdate.CreatedShippingUpdateStrategy
 import shippingUpdate.ShippingUpdate
+import shippingUpdate.ShippingUpdateStrategy
 
 internal class ShipmentTest{
     private val shipmentId: String = "0001"
@@ -14,37 +17,63 @@ internal class ShipmentTest{
     private val shipmentExpectedDeliveryDate: Long = 193049575904
     private val shipmentNote1: String = "note 1"
     private val shipmentNote2: String = "note 2"
-    private val shipment: Shipment = Shipment.getShipment("standard", shipmentId)
+    private val shipment: Shipment = Shipment.getShipment(shipmentId, "standard")
     private val shippingUpdate: ShippingUpdate = ShippingUpdate("N/A", shipmentStatus, 10399890923)
 
     @Test
+    fun getShipmentStandardDefaultStandard(){
+        val createdShippingUpdateStrategy: ShippingUpdateStrategy = CreatedShippingUpdateStrategy()
+        val thisShippingInformation: String = "created,standardTest,3352353"
+        createdShippingUpdateStrategy.updateShipment(thisShippingInformation)
+        val thisShipment = TrackingServer.findShipment("standardTest")
+        assertTrue(thisShipment is StandardShipment)
+        assertTrue(thisShipment!!.shipmentType == "standard")
+    }
+
+    @Test
     fun getShipmentStandard(){
-        val shipment: Shipment = Shipment.getShipment("standard", "S1000")
-        assertTrue(shipment is StandardShipment)
+        val createdShippingUpdateStrategy: ShippingUpdateStrategy = CreatedShippingUpdateStrategy()
+        val thisShippingInformation: String = "created,standardTest2,3352353,standard"
+        createdShippingUpdateStrategy.updateShipment(thisShippingInformation)
+        val thisShipment = TrackingServer.findShipment("standardTest2")
+        assertTrue(thisShipment is StandardShipment)
+        assertTrue(thisShipment!!.shipmentType == "standard")
     }
 
     @Test
     fun getShipmentExpress(){
-        val shipment: Shipment = Shipment.getShipment("express", "S1000")
-        assertTrue(shipment is ExpressShipment)
+        val createdShippingUpdateStrategy: ShippingUpdateStrategy = CreatedShippingUpdateStrategy()
+        val thisShippingInformation: String = "created,expressTest,3352353,express,12435454"
+        createdShippingUpdateStrategy.updateShipment(thisShippingInformation)
+        val thisShipment = TrackingServer.findShipment("expressTest")
+        assertTrue(thisShipment is ExpressShipment)
+        assertTrue(thisShipment!!.shipmentType == "express")
     }
 
     @Test
     fun getShipmentOvernight(){
-        val shipment: Shipment = Shipment.getShipment("overnight", "S1000")
-        assertTrue(shipment is OvernightShipment)
+        val createdShippingUpdateStrategy: ShippingUpdateStrategy = CreatedShippingUpdateStrategy()
+        val thisShippingInformation: String = "created,overnightTest,3352353,overnight,12435454"
+        createdShippingUpdateStrategy.updateShipment(thisShippingInformation)
+        val thisShipment = TrackingServer.findShipment("overnightTest")
+        assertTrue(thisShipment is OvernightShipment)
+        assertTrue(thisShipment!!.shipmentType == "overnight")
     }
 
     @Test
     fun getShipmentBulk(){
-        val shipment: Shipment = Shipment.getShipment("bulk", "S1000")
-        assertTrue(shipment is BulkShipment)
+        val createdShippingUpdateStrategy: ShippingUpdateStrategy = CreatedShippingUpdateStrategy()
+        val thisShippingInformation: String = "created,bulkTest,3352353,bulk,12435454"
+        createdShippingUpdateStrategy.updateShipment(thisShippingInformation)
+        val thisShipment = TrackingServer.findShipment("bulkTest")
+        assertTrue(thisShipment is BulkShipment)
+        assertTrue(thisShipment!!.shipmentType == "bulk")
     }
 
     @Test
     fun getShipmentInvalidType(){
         assertThrows<Exception> {
-            val shipment: Shipment = Shipment.getShipment("invalid", "S1000")
+            val shipment: Shipment = Shipment.getShipment("S1000", "invalid")
         }
     }
 
@@ -91,10 +120,11 @@ internal class ShipmentTest{
     fun registerRemoveObserver(){
         val trackerViewHelper: TrackerViewHelper = TrackerViewHelper(shipmentId)
         val trackerViewHelper2: TrackerViewHelper = TrackerViewHelper(shipmentId)
-        val shipment: Shipment = Shipment.getShipment("standard", shipmentId)
+        val shipment: Shipment = Shipment.getShipment(shipmentId, "standard")
         shipment.registerObserver(trackerViewHelper)
         shipment.registerObserver(trackerViewHelper2)
         assertTrue(shipment.observers.contains(trackerViewHelper))
+        assertTrue(shipment.observers.contains(trackerViewHelper2))
         shipment.removeObserver(trackerViewHelper)
         assertFalse(shipment.observers.contains(trackerViewHelper))
         shipment.removeObserver(trackerViewHelper2)

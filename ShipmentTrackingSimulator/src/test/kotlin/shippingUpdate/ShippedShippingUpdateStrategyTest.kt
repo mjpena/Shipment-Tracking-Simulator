@@ -3,6 +3,8 @@ package shippingUpdate
 import TrackingServer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import shippingUpdate.CreatedShippingUpdateStrategy
+import shippingUpdate.ShippedShippingUpdateStrategy
 
 internal class ShippedShippingUpdateStrategyTest{
     @Test

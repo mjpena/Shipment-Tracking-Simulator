@@ -9,7 +9,10 @@ import subject.Shipment
 
 class TrackerViewHelper(shipmentId: String): Observer {
     var shipment: Shipment? = null
+        private set
     var shipmentId by mutableStateOf<String>(shipmentId)
+        private set
+    var shipmentType by mutableStateOf<String>("")
         private set
     var shipmentStatus by mutableStateOf<String>("")
         private set
@@ -36,6 +39,7 @@ class TrackerViewHelper(shipmentId: String): Observer {
     }
     override fun update() {
         if (shipment == null) return
+        shipmentType == shipment!!.shipmentType
         shipmentStatus = shipment!!.status
         shipmentLocation = shipment!!.currentLocation
         shipmentDeliveryDate.add(shipment!!.expectedDeliveryDate)
