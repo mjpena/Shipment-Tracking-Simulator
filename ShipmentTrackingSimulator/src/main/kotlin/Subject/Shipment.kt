@@ -2,8 +2,10 @@ package subject
 
 import observer.TrackerViewHelper
 import shippingUpdate.ShippingUpdate
-abstract class Shipment(val id: String, val shipmentType: String, expectedDeliveryDate: Long): Subject {
+abstract class Shipment(val id: String, shipmentType: String): Subject {
     val observers: MutableList<TrackerViewHelper> = mutableListOf()
+    var shipmentType: String = shipmentType
+        protected set
     var status: String = "N/A"
         set(value) {
             field = value
@@ -14,17 +16,15 @@ abstract class Shipment(val id: String, val shipmentType: String, expectedDelive
             field = value
             notifyObservers()
         }
-    var expectedDeliveryDate: Long = expectedDeliveryDate
-        set(value) {
-            if (value < 0){
-                throw Exception("Expected delivery date cannot be a negative time.")
-            }
-            field = value
-            notifyObservers()
-        }
+    abstract var expectedDeliveryDate: Long
     val notes: MutableList<String> = mutableListOf()
     val updateHistory: MutableList<ShippingUpdate> = mutableListOf()
 
+    protected fun throwErrorIfNegative(newExpectedDeliveryDate: Long){
+        if (newExpectedDeliveryDate < 0) {
+            throw Exception("Expected delivery date cannot be a negative time.")
+        }
+    }
     fun addNote(note: String){
         notes.add(note)
         notifyObservers()
