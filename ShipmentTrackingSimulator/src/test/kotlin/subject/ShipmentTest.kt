@@ -33,18 +33,11 @@ internal class ShipmentTest{
     }
 
     @Test
-    fun getShipmentWrongShipmentType(){
+    fun wrongShipmentType(){
         val createdShippingUpdateStrategy: ShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         val thisShippingInformation: String = "created,standardTest2,3352353,wrong"
         assertThrows<Exception> {
             createdShippingUpdateStrategy.updateShipment(thisShippingInformation)
-        }
-    }
-
-    @Test
-    fun getShipmentInvalidType(){
-        assertThrows<Exception> {
-            val shipment: Shipment = Shipment.getShipment("S1000", "invalid", shippingUpdateTimestamp, shippingExpectedDeliveryDate)
         }
     }
 

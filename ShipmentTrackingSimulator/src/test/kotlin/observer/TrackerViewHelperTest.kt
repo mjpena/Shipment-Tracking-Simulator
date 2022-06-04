@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 import subject.Shipment
 
 internal class TrackerViewHelperTest{
-    private val shippingId: String = "s10001"
-    private val shippingId2: String = "s10002"
-    private val shippingId3: String = "s10003"
+    private val shippingId: String = "tvht1"
+    private val shippingId2: String = "tvht2"
+    private val shippingId3: String = "tvht3"
     private val shippingType: String = "standard"
     private val shippingUpdateTimestamp: Long = 2022061001
     private val shippingExpectedDeliveryDate: Long = 2022061405

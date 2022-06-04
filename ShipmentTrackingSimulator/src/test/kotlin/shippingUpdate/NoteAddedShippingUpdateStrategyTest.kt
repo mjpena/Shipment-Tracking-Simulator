@@ -8,13 +8,13 @@ import shippingUpdate.NoteAddedShippingUpdateStrategy
 internal class NoteAddedShippingUpdateStrategyTest{
     @Test
     fun createShippingUpdate(){
-        val createdShippingInformation: String = "created,S00001,1234455,standard,94353049"
+        val createdShippingInformation: String = "created,nsust,1234455,standard,94353049"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
-        val noteShippingInformation: String = "note,S00001,1234455,note"
+        val noteShippingInformation: String = "note,nsust,1234455,note"
         val noteShippingUpdateStrategy: NoteAddedShippingUpdateStrategy = NoteAddedShippingUpdateStrategy()
         noteShippingUpdateStrategy.updateShipment(noteShippingInformation)
-        assertEquals(TrackingServer.findShipment("S00001")!!.status, "note")
-        assertTrue(TrackingServer.findShipment("S00001")!!.notes.contains("note") )
+        assertEquals(TrackingServer.findShipment("nsust")!!.status, "note")
+        assertTrue(TrackingServer.findShipment("nsust")!!.notes.contains("note") )
     }
 }

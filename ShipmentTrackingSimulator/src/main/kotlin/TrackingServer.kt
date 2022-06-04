@@ -40,7 +40,7 @@ object TrackingServer {
     }
 
     fun addShipment(shipment: Shipment){
-        if (shipments.contains(shipment)) return
+        if (shipments.contains(shipment) || findShipment(shipment.id) != null) throw Exception("Cannot add shipment. Shipment with ID ${shipment.id} already exists.")
         shipments.add(shipment)
     }
 

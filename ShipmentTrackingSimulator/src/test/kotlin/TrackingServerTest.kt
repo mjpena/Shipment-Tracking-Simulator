@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import subject.Shipment
 
 internal class TrackingServerTest{
@@ -16,7 +17,11 @@ internal class TrackingServerTest{
     }
 
     @Test
-    fun addAlreadyPresentShipment(){}
+    fun addAlreadyPresentShipment(){
+        assertThrows<Exception>{
+            TrackingServer.addShipment(shipment)
+        }
+    }
 
     @Test
     fun findNonexistentShipment() {

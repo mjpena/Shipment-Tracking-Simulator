@@ -9,13 +9,13 @@ import shippingUpdate.ShippedShippingUpdateStrategy
 internal class ShippedShippingUpdateStrategyTest{
     @Test
     fun createShippingUpdate(){
-        val createdShippingInformation: String = "created,S00001,1234455,standard,94353049"
+        val createdShippingInformation: String = "created,ssust,1234455,standard,94353049"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
-        val shippedShippingInformation: String = "shipped,S00001,123455,234909849"
+        val shippedShippingInformation: String = "shipped,ssust,123455,234909849"
         val shippedShippingUpdateStrategy: ShippedShippingUpdateStrategy = ShippedShippingUpdateStrategy()
         shippedShippingUpdateStrategy.updateShipment(shippedShippingInformation)
-        assertEquals(TrackingServer.findShipment("S00001")!!.status, "shipped")
-        assertEquals(TrackingServer.findShipment("S00001")!!.expectedDeliveryDate, 234909849)
+        assertEquals(TrackingServer.findShipment("ssust")!!.status, "shipped")
+        assertEquals(TrackingServer.findShipment("ssust")!!.expectedDeliveryDate, 234909849)
     }
 }

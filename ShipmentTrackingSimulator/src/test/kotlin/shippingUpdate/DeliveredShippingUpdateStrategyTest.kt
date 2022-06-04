@@ -8,12 +8,12 @@ import shippingUpdate.DeliveredShippingUpdateStrategy
 internal class DeliveredShippingUpdateStrategyTest{
     @Test
     fun createShippingUpdate(){
-        val createdShippingInformation: String = "created,S00001,1234455,standard,23980323"
+        val createdShippingInformation: String = "created,desust,1234455,standard,23980323"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
-        val deliveredShippingInformation: String = "delivered,S00001,1234455"
+        val deliveredShippingInformation: String = "delivered,desust,1234455"
         val deliveredShippingUpdateStrategy: DeliveredShippingUpdateStrategy = DeliveredShippingUpdateStrategy()
         deliveredShippingUpdateStrategy.updateShipment(deliveredShippingInformation)
-        assertEquals(TrackingServer.findShipment("S00001")!!.status, "delivered")
+        assertEquals(TrackingServer.findShipment("desust")!!.status, "delivered")
     }
 }
