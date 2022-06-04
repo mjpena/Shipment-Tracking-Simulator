@@ -2,7 +2,7 @@ package subject
 
 import observer.TrackerViewHelper
 import shippingUpdate.ShippingUpdate
-abstract class Shipment(val id: String, val shipmentType: String): Subject {
+abstract class Shipment(val id: String, val shipmentType: String, expectedDeliveryDate: Long): Subject {
     val observers: MutableList<TrackerViewHelper> = mutableListOf()
     var status: String = "N/A"
         set(value) {
@@ -14,7 +14,7 @@ abstract class Shipment(val id: String, val shipmentType: String): Subject {
             field = value
             notifyObservers()
         }
-    var expectedDeliveryDate: Long = 0
+    var expectedDeliveryDate: Long = expectedDeliveryDate
         set(value) {
             if (value < 0){
                 throw Exception("Expected delivery date cannot be a negative time.")
@@ -37,11 +37,11 @@ abstract class Shipment(val id: String, val shipmentType: String): Subject {
     }
 
     companion object {
-        fun getShipment(shipmentId: String, shipmentType: String): Shipment {
-            if (shipmentType == "standard") return StandardShipment(shipmentId, shipmentType)
-            if (shipmentType == "express") return ExpressShipment(shipmentId, shipmentType)
-            if (shipmentType == "overnight") return OvernightShipment(shipmentId, shipmentType)
-            if (shipmentType == "bulk") return BulkShipment(shipmentId, shipmentType)
+        fun getShipment(shipmentId: String, shipmentType: String, updateTimestamp: Long, expectedDeliveryDate: Long): Shipment {
+            if (shipmentType == "standard") return StandardShipment(shipmentId, shipmentType, expectedDeliveryDate)
+            if (shipmentType == "express") return ExpressShipment(shipmentId, shipmentType, updateTimestamp, expectedDeliveryDate)
+            if (shipmentType == "overnight") return OvernightShipment(shipmentId, shipmentType, updateTimestamp, expectedDeliveryDate)
+            if (shipmentType == "bulk") return BulkShipment(shipmentId, shipmentType, updateTimestamp, expectedDeliveryDate)
             throw Exception("Invalid shipment type: $shipmentType")
         }
     }

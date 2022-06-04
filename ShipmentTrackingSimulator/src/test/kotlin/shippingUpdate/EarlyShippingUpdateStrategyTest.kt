@@ -9,7 +9,7 @@ import shippingUpdate.EarlyShippingUpdateStrategy
 internal class EarlyShippingUpdateStrategyTest {
     @Test
     fun createShippingUpdate(){
-        val createdShippingInformation: String = "created,S00001,1234455"
+        val createdShippingInformation: String = "created,S00001,1234455,standard,94353049"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
         val earlyShippingInformation: String = "early,S00001,1234455,1233334"
@@ -21,7 +21,7 @@ internal class EarlyShippingUpdateStrategyTest {
 
     @Test
     fun createShippingUpdateNoExpectedDeliveryDate(){
-        val createdShippingInformation: String = "created,S00001,1234455"
+        val createdShippingInformation: String = "created,S00001,1234455,standard,94353049"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
         val earlyShippingInformation: String = "early,S00001,1234455"

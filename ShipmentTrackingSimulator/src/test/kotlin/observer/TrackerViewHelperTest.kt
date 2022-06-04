@@ -9,9 +9,11 @@ internal class TrackerViewHelperTest{
     private val shippingId: String = "s10001"
     private val shippingId2: String = "s10002"
     private val shippingId3: String = "s10003"
-    private val shippingType: String = "express"
-    private val shipment: Shipment = Shipment.getShipment(shippingId, shippingType)
-    private val shipment2: Shipment = Shipment.getShipment(shippingId2, shippingType)
+    private val shippingType: String = "standard"
+    private val shippingUpdateTimestamp: Long = 2022061001
+    private val shippingExpectedDeliveryDate: Long = 2022061405
+    private val shipment: Shipment = Shipment.getShipment(shippingId, shippingType, shippingUpdateTimestamp, shippingExpectedDeliveryDate)
+    private val shipment2: Shipment = Shipment.getShipment(shippingId2, shippingType, shippingUpdateTimestamp, shippingExpectedDeliveryDate)
 
     @Test
     fun trackShipment(){

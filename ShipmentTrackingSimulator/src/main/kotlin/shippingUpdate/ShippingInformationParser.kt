@@ -21,8 +21,7 @@ class ShippingInformationParser(private val shippingInformation: String) {
     }
 
     fun getShippingUpdateShipmentType(): String{
-        if (shippingInformation.split(",").size > 3) return argumentChecker(3)
-        return "standard"
+        return argumentChecker(3)
     }
 
     fun getShippingUpdateExpectedDeliveryDate(): Long{

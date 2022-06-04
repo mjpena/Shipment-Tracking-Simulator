@@ -57,13 +57,6 @@ internal class ShippingInformationParserTest{
     }
 
     @Test
-    fun parseShipmentTypeHasNoValue(){
-        val shippingInformation: String = "created,S1000,1234567"
-        val shippingInformationParser = ShippingInformationParser(shippingInformation)
-        assertEquals("standard", shippingInformationParser.getShippingUpdateShipmentType())
-    }
-
-    @Test
     fun parseShipmentTypeHasValue(){
         val shippingInformation: String = "created,S1000,1234567,bulk"
         val shippingInformationParser = ShippingInformationParser(shippingInformation)

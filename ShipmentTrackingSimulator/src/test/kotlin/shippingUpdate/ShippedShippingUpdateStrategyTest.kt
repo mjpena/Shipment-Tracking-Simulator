@@ -9,7 +9,7 @@ import shippingUpdate.ShippedShippingUpdateStrategy
 internal class ShippedShippingUpdateStrategyTest{
     @Test
     fun createShippingUpdate(){
-        val createdShippingInformation: String = "created,S00001,1234455"
+        val createdShippingInformation: String = "created,S00001,1234455,standard,94353049"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
         val shippedShippingInformation: String = "shipped,S00001,123455,234909849"

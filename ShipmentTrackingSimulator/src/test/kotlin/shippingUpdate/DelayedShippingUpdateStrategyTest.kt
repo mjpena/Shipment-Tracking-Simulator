@@ -10,7 +10,7 @@ import shippingUpdate.DelayedShippingUpdateStrategy
 internal class DelayedShippingUpdateStrategyTest{
     @Test
     fun createShippingUpdate(){
-        val createdShippingInformation: String = "created,S00001,1234455"
+        val createdShippingInformation: String = "created,S00001,1234455,standard,49038953"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
         val delayedShippingInformation: String = "delayed,S00001,1234455,1233334"
@@ -22,7 +22,7 @@ internal class DelayedShippingUpdateStrategyTest{
 
     @Test
     fun createShippingUpdateNoExpectedDeliveryDate(){
-        val createdShippingInformation: String = "created,S00001,1234455"
+        val createdShippingInformation: String = "created,S00001,1234455,standard,49038953"
         val createShippingUpdateStrategy: CreatedShippingUpdateStrategy = CreatedShippingUpdateStrategy()
         createShippingUpdateStrategy.updateShipment(createdShippingInformation)
         val delayedShippingInformation: String = "delayed,S00001,1234455"
