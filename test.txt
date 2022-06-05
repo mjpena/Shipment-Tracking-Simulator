@@ -8,22 +8,22 @@ noteadded,s10,2022061001,damaged during transit
 
 # express
 created,s11,2022061001,express,2022061301
-delayed,s1,2022061001,express,2022061501
-early,s11,2022061001,express,2022061301
+delayed,s11,2022061001,2022061501
+early,s11,2022061001,2022061301
 
 # express late delivery date
 created,s12,2022061001,express,2022061501
 
 # overnight
 created,s13,2022061001,overnight,2022061020
-delayed,s13,2022061001,overnight,2022061501
+delayed,s13,2022061001,2022061501
 
 # overnight late delivery
 created,s14,2022061001,overnight,2022061201
 
 # bulk
 created,s15,2022061401,bulk,2022061801
-early,s15,2022061001,bulk,2022061501
+early,s15,2022061001,2022061501
 
 # bulk early delivery
 created,s16,2022061001,bulk,2022061201
