@@ -37,11 +37,11 @@ abstract class Shipment(val id: String, shipmentType: String): Subject {
     }
 
     companion object {
-        fun getShipment(shipmentId: String, shipmentType: String, updateTimestamp: Long, expectedDeliveryDate: Long): Shipment {
+        fun getShipment(shipmentId: String, shipmentType: String,  createdTimestamp: Long, expectedDeliveryDate: Long): Shipment {
             if (shipmentType == "standard") return StandardShipment(shipmentId, shipmentType, expectedDeliveryDate)
-            if (shipmentType == "express") return ExpressShipment(shipmentId, shipmentType, updateTimestamp, expectedDeliveryDate)
-            if (shipmentType == "overnight") return OvernightShipment(shipmentId, shipmentType, updateTimestamp, expectedDeliveryDate)
-            if (shipmentType == "bulk") return BulkShipment(shipmentId, shipmentType, updateTimestamp, expectedDeliveryDate)
+            if (shipmentType == "express") return ExpressShipment(shipmentId, shipmentType, createdTimestamp, expectedDeliveryDate)
+            if (shipmentType == "overnight") return OvernightShipment(shipmentId, shipmentType, createdTimestamp, expectedDeliveryDate)
+            if (shipmentType == "bulk") return BulkShipment(shipmentId, shipmentType, createdTimestamp, expectedDeliveryDate)
             throw Exception("Invalid shipment type: $shipmentType")
         }
     }

@@ -8,7 +8,7 @@ class StandardShipment(id: String, shipmentType: String, expectedDeliveryDate: L
             notifyObservers()
         }
 
-    init {
+    init{
         throwErrorIfNegative(expectedDeliveryDate)
     }
 }

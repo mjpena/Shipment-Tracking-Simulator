@@ -25,14 +25,18 @@ object TrackingServer {
         embeddedServer(Netty, 8080) {
             routing {
                 get("/") {
-                    val shipmentInformation: String? = call.parameters["shippingInformation"]
-                    if (shipmentInformation != null) {
-                        val shipmentUpdateStatus = shipmentInformation.split(",")[0]
-                        if (shippingUpdateStrategies[shipmentUpdateStatus]?.updateShipment(shipmentInformation) == null){
-                            call.respondText("<h1>Shipment Tracking Server</h1><p>Failed. Invalid shipment information.</p>", ContentType.Text.Html)
-                            throw Exception("Invalid shipping update status: $shipmentUpdateStatus")
+                    try{
+                        val shipmentInformation: String? = call.parameters["shippingInformation"]
+                        if (shipmentInformation != null) {
+                            val shipmentUpdateStatus = shipmentInformation.split(",")[0]
+                            if (shippingUpdateStrategies[shipmentUpdateStatus]?.updateShipment(shipmentInformation) == null){
+                                throw Exception("Invalid shipping update status: $shipmentUpdateStatus")
+                            }
+                            call.respondText("<h1>Shipment Tracking Server</h1><p>Success!</p>", ContentType.Text.Html)
                         }
-                        call.respondText("<h1>Shipment Tracking Server</h1><p>Success!</p>", ContentType.Text.Html)
+                    }
+                    catch (cause: Throwable){
+                        call.respondText("<h1>Shipment Tracking Server</h1><p>Failed. Invalid shipment information.</p>", ContentType.Text.Html)
                     }
                 }
             }
